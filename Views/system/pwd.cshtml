@@ -1,0 +1,69 @@
+﻿
+<body class="wln">
+    <div class="wln-window" style="display:block;margin:0px auto;">
+        <table class="wln-window-table">
+            <tr>
+                <td>旧密码：</td>
+                <td>
+                    <input type="password" id="opwd" /><span class="tips notnull">请输入旧密码</span>
+                </td>
+            </tr>
+            <tr>
+                <td>新密码：</td>
+                <td>
+                    <input type="password" id="npwd" /><span class="tips notnull">请输入新密码</span>
+                </td>
+            </tr>
+            <tr>
+                <td>重复新密码：</td>
+                <td>
+                    <input type="password" id="rpwd" /><span class="tips notnull">请重新输入新密码</span>
+                </td>
+            </tr>
+        </table>
+
+        @*<div class="wln-window-table">
+            <ul>
+                <li>旧密码：<input type="password" id="opwd" /><span class="tips notnull">请输入旧密码</span></li>
+                <li>新密码：<input type="password" id="npwd" /><span class="tips notnull">请输入新密码</span></li>
+                <li>重复新密码：<input type="password" id="rpwd" /><span class="tips notnull">请重新输入新密码</span></li>
+            </ul>
+        </div>*@
+
+        <div class="wln-window-btns">
+            <a class="button green" onclick="Save();">立即修改</a>
+        </div>
+    </div>
+    <script type="text/javascript">
+        sessionStorage.setItem('inline', '<li>用户</li><li>密码修改</li>');
+        function Save() {
+            if (!$('#opwd').val()) {
+                alert("旧密码未输入，请输入");
+                $('#opwd').focus();
+                return false;
+            } else if (!$('#npwd').val()) {
+                alert("新密码未输入，请输入");
+                $('#npwd').focus();
+                return false;
+            } else if ($('#npwd').val() != $('#rpwd').val()) {
+                alert("两次密码不一致，请修改");
+                $('#rpwd').focus();
+                return false;
+            }
+            $.get(location.pathname + "?do=save", {
+                opwd: $('#opwd').val()
+                , npwd: $('#npwd').val()
+                , rpwd: $('#rpwd').val()
+            }, function (json) {
+                if (json.success) {
+                    $('#opwd').val('');
+                    $('#npwd').val('');
+                    $('#rpwd').val('');
+                    alert("密码修改成功！");
+                } else {
+                    alert(json.message);
+                }
+            }, "json");
+        }
+    </script>
+</body>

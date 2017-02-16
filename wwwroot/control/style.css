@@ -1,0 +1,175 @@
+html{margin:0;padding:0;border:0;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);}
+body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, q, dl, dt, dd, ol, ul, li, fieldset, form, legend, caption, tbody, tfoot, thead, article, aside, dialog, figure, footer, header, hgroup, nav, section{margin:0;padding:0;border:0;font-size:14px;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure, dialog, footer, header, hgroup, menu, nav, section{display:block;}
+body{font-size:14px;color:#333;font-family:"Microsoft YaHei","simsun","Helvetica Neue", Arial, Helvetica, sans-serif;}
+img{border:0;vertical-align:bottom;}
+a{color:#333;text-decoration:none;cursor:pointer;}
+a:focus,a:hover{color:#09c;}
+
+.float-left{float:left !important;}
+.float-right{float:right !important;}
+
+.button{border:solid 1px #ddd;background:transparent;border-radius:4px;font-size:14px;padding:6px 15px;margin:0;display:inline-block;line-height:20px;transition:all 1s cubic-bezier(0.175, 0.885, 0.32, 1) 0s;}
+.button[disabled]{pointer-events:none;cursor:not-allowed;webkit-box-shadow:none;box-shadow:none;filter:alpha(opacity=50);opacity:.5;}
+.button:active{background-image:none;outline:0;transition:all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1) 0s;}
+.button:hover{transition:all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1) 0s;}
+.button-block{display:block;width:100%;}
+.button-large{padding:15px 20px;font-size:24px;line-height:24px;}
+.button-big{padding:10px 15px;font-size:18px;line-height:22px;}
+.button-small{padding:5px 10px;font-size:12px;font-weight:normal;line-height:18px;}
+.button-little{padding:3px 5px;font-size:12px;font-weight:normal;line-height:16px;}
+.button.bg-main,.button.bg-sub,.button.bg-dot,.button.bg-black,.button.bg-gray,.button.bg-red,.button.bg-yellow,.button.bg-blue,.button.bg-green{color:#fff;}
+
+
+
+.nav{list-style:none;padding:5px 0 0 0;margin:0;}
+.nav li{position:relative;}
+.nav a{color:#333;line-height:20px;padding:5px 18px;transition:all 1s cubic-bezier(0.175, 0.885, 0.32, 1) 0s;display:block;}
+.nav a:hover{transition:all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1) 0s;}
+.nav .arrow{display:none;}
+.nav .active a{font-weight:bold;}
+
+
+
+
+.nav ul{display:block;list-style:none;padding:0;}
+.nav ul a{font-weight:normal;padding:5px 2px 5px 8px;}
+.nav ul ul a{padding-left:40px;}
+.nav ul ul ul a{padding-left:60px;}
+.nav ul ul ul ul a{padding-left:80px;}
+.nav .active ul a{font-weight:normal;}
+.nav-menu .drop-menu{display:none;margin-top:-1px;}
+.nav-menu ul{padding:5px 0;}
+.nav-menu .arrow{display:inline-block;}
+.nav-menu ul .arrow{display:none;}
+.nav-menu li:hover ul{display:block;}
+.nav-menu.nav-big ul a{line-height:20px;}
+
+.bread{border-radius:4px;padding:8px 15px;font-size:12px;margin-bottom:15px;color:#999;}
+.bread li{display:inline-block;}
+.bread li:after{content:"\002f";padding:0 8px;color:#ddd;}
+.bread li:last-child:after{content:"";}
+
+
+.lefter{position:relative;float:left;width:180px;margin-right:-180px;background:#e6f2fb;text-align:center;}
+.righter{float:right;width:100%;padding-top:15px;background:#e6f2fb;}
+.mainer{margin-left:180px;}
+.logo{border-bottom:solid 1px #b5cfd9;padding:18px 0px;text-align:center;}
+.logo > *,.logo > * > *{max-height:50px;max-width:180px;}
+
+.admin-navbar{border-bottom:solid 5px #09c;padding:0 15px;}
+.admin-nav li{display:inline-block;}
+.admin-nav ul{display:none;}
+.admin-nav ul li{float:none;display:block;width:100%;position:relative;}
+
+.admin-nav ul ul li{list-style:circle;margin-left:15px;}
+.admin-nav ul .child{display:none;padding-left:0.2rem;}
+.admin-nav ul .child a{display:block;font-size:12px;color:#888888;position:relative;}
+.admin-nav .active a{background:#09c;color:#fff;border-radius:4px 4px 0 0;}
+.admin-nav .active ul{display:block;position:fixed;left:0;width:180px;margin-top:41px;}
+.admin-nav .active ul a{background:transparent;color:#333;border-radius:0;}
+
+.admin-nav ul li span{display:none;position:absolute;top:6px;right:3px;font-size:12px;line-height:12px;background:#f60;color:#fff;padding:0px 6px;border:1px solid #e33;cursor:pointer;}
+.admin-nav ul li span:hover{background:#ee6f33;color:#fdc;}
+.admin-nav ul li:hover span{display:inline-block;}
+
+.admin-bread{background:#f2f9fd;border-left:solid 1px #b5cfd9;border-bottom:solid 1px #b5cfd9;line-height:20px;}
+.admin-bread .bread{margin-bottom:0;}
+.admin-bread span{float:right;font-size:12px;color:#666;line-height:36px;}
+
+.admin{padding:0px;background:#fff;position:fixed;border-left:solid 1px #b5cfd9;right:0;bottom:0;top:87px;left:180px; overflow:auto;}
+
+.text-black, a.text-black:link, a.text-black:visited,.button.border-black,blockquote.border-black strong,.pager.border-black a,.pager-prev.border-black,.pager-next.border-black
+{color:#000;}
+a.text-black:hover{color:#666;}
+.text-gray, a.text-gray:link, a.text-gray:visited,.button.border-gray,blockquote.border-gray strong,.pager.border-gray a,.pager-prev.border-gray,.pager-next.border-gray
+{color:#999;}
+.text-white, a.text-white:link, a.text-white:visited,.button.border-white,blockquote.border-white,.pager.border-white a,.pager-prev.border-white,.pager-next.border-white
+{color:#fff;}
+.text-red, a.text-red:link, a.text-red:visited,.button.border-red,.button.bg-red-light,blockquote.border-red strong,.pager.border-red a,.pager-prev.border-red,.pager-next.border-red,.badge.bg-red-light,.alert-red,.check-error
+{color:#e33;}
+.text-yellow, a.text-yellow:link, a.text-yellow:visited,.button.border-yellow,.button.bg-yellow-light,blockquote.border-yellow strong,.pager.border-yellow a,.pager-prev.border-yellow,.pager-next.border-yellow,.badge.bg-yellow-light,.alert-yellow,.check-warning
+{color:#f60;}
+.text-blue, a.text-blue:link, a.text-blue:visited,.button.border-blue,.button.bg-blue-light,blockquote.border-blue strong,.pager.border-blue a,.pager-prev.border-blue,.pager-next.border-blue,.badge.bg-blue-light,.alert-blue
+{color:#0ae;}
+.text-green, a.text-green:link, a.text-green:visited,.button.border-green,.button.bg-green-light,blockquote.border-green strong,.pager.border-green a,.pager-prev.border-green,.pager-next.border-green,.badge.bg-green-light,.alert-green,.check-success
+{color:#2c7;}
+.text-red-light, a.text-red-light:link, a.text-red-light:visited,.button.border-red-light,blockquote.border-red-light strong,.pager.border-red-light a
+{color:#fdc;}
+.text-yellow-light, a.text-yellow-light:link, a.text-yellow-light:visited,.button.border-yellow-light,blockquote.border-yellow-light strong,.pager.border-yellow-light a,.pager-prev.border-yellow-light,.pager-next.border-yellow-light
+{color:#fec;}
+.text-blue-light, a.text-blue-light:link, a.text-blue-light:visited,.button.border-blue-light,blockquote.border-blue-light strong,.pager.border-blue-light a,.pager-prev.border-blue-light,.pager-next.border-blue-light
+{color:#def;}
+.text-green-light, a.text-green-light:link, a.text-green-light:visited,.button.border-green-light,blockquote.border-green-light strong,.pager.border-green-light a,.pager-prev.border-green-light,.pager-next.border-green-light
+{color:#ded;}
+.bg-inverse, .bg-inverse a{color:#fff;}
+a.text-white:hover, .bg-inverse a:hover{color:#ddd;}
+.bg,.table .current, .table .current td,.table .current th,.button.active,.pointer.border .active,.nav-menu ul a:hover,.nav-menu.nav-pills .active ul a:hover,.bg-inverse .nav.nav-menu ul a:hover,.bg-inverse .nav.nav-menu .active ul a:hover,.bg-inverse .nav.nav-menu.nav-tabs ul a:hover,.bg-inverse .nav.nav-menu.nav-pills ul a:hover,.bg-inverse .nav-menu.nav-inline.nav-big ul a:hover,.navbar-body .nav ul a:hover
+{background-color:#f5f5f5;}
+.bg-black,.border-black .button.active,.pointer.border-black .active,.nav-pills.border-black .active a,.nav-main.border-black .nav-head,.pagination.border-black .active
+{background-color:#000;}
+.bg-gray,.border-gray .button.active,.pointer.border-gray .active,.nav-pills.border-gray .active a,.nav-main.border-gray .nav-head,.pagination.border-gray .active
+{background-color:#999;}
+.bg-white,.button.bg,.border-white .button.active,.pointer.border-white .active,.nav-pills.border-white .active a,.nav-main.border-white .nav-head,.pagination.border-white .active
+{background-color:#fff;}
+.bg-red,.border-red .button.active,.pointer.border-red .active,.nav-pills.border-red .active a,.nav-main.border-red .nav-head,.pagination.border-red .active
+{background-color:#e33;}
+.bg-yellow,.border-yellow .button.active,.pointer.border-yellow .active,.nav-pills.border-yellow .active a,.nav-main.border-yellow .nav-head,.pagination.border-yellow .active
+{background-color:#f60;}
+.bg-blue,.border-blue .button.active,.pointer.border-blue active,.nav-pills.border-blue .active a,.nav-main.border-blue .nav-head,.pagination.border-blue .active
+{background-color:#0ae;}
+.bg-green,.border-green .button.active,.pointer.border-green .active,.nav-pills.border-green .active a,.pagination.border-green .active
+{background-color:#2c7;}
+.bg-red-light,.table .red, .table .red td, .table .red th,.alert-red,.border-red-light .button.active,.pointer.border-red-light .active,.nav-pills.border-red-light .active a,.nav-main.border-red-light .nav-head,.pagination.border-red-light .active
+{background-color:#fee;}
+.bg-yellow-light,.table .yellow, .table .yellow td, .table .yellow th,.alert-yellow,.border-yellow-light .button.active,.pointer.border-yellow-light .active,.nav-pills.border-yellow-light .active a,.nav-main.border-yellow-light .nav-head,.pagination.border-yellow-light .active
+{background-color:#ffd;}
+.bg-blue-light,.table .blue, .table .blue td, .table .blue th,.alert-blue,.border-blue-light .button.active,.pointer.border-blue-light .active,.nav-pills.border-blue-light .active a,.nav-main.border-blue-light .nav-head,.pagination.border-blue-light .active
+{background-color:#eff;}
+.bg-green-light,.table .green, .table .green td, .table .green th,.alert-green,.border-green-light .button.active,.pointer.border-green-light .active,.nav-pills.border-green-light .active a,.nav-main.border-green-light .nav-head,.pagination.border-green-light .active
+{background-color:#efd;}
+.border-dashed{border-style:dashed;}
+.border-dotted{border-style:dotted;}
+.border-double{border-style:double;}
+.border-inset{border-style:inset;}
+.border-outset{border-style:outset;}
+.border-black,.border-black .button,.border-black .tab-nav li a,.border-black .tab-body,.button.bg-black,.selected.border-black,.pointer.border-black li,.nav.border-black .active a,.nav.nav-tabs.border-black,.nav-main.border-black a, .nav-main.border-black .nav-head,.pagination.border-black li,.pager.border-black a
+{border-color:#000;}
+.border-gray,.border-gray .button,.border-gray .tab-nav li a,.border-gray .tab-body,.button.bg-gray,.selected.border-gray,.pointer.border-gray li,.nav.border-gray .active a,.nav.nav-tabs.border-gray,.nav-main.border-gray a, .nav-main.border-gray .nav-head,.pagination.border-gray li,.pager.border-gray a
+{border-color:#999;}
+.border-white,.border-white .button,.border-white .tab-nav li a,.border-white .tab-body,.button.bg-white,.selected.border-white,.pointer.border-white li,.nav.border-white .active a,.nav.nav-tabs.border-white,.nav-main.border-white a, .nav-main.border-white .nav-head,.pagination.border-white li,.pager.border-white a
+{border-color:#fff;}
+.border-red,.border-red .button,.border-red .tab-nav li a,.border-red .tab-body,.button.bg-red,.selected.border-red,.pointer.border-red li,.check-error .input,.nav.border-red .active a,.nav.nav-tabs.border-red,.nav-main.border-red a, .nav-main.border-red .nav-head,.pagination.border-red li,.pager.border-red a
+{border-color:#e33;}
+.border-yellow,.border-yellow .button,.border-yellow .tab-nav li a,.border-yellow .tab-body,.button.bg-yellow,.selected.border-yellow,.pointer.border-yellow li,.check-warning .input,.nav.border-yellow .active a,.nav.nav-tabs.border-yellow,.nav-main.border-yellow a, .nav-main.border-yellow .nav-head,.pagination.border-yellow li,.pager.border-yellow a
+{border-color:#f60;}
+.border-blue,.border-blue .button,.border-blue .tab-nav li a,.border-blue .tab-body,.button.bg-blue,.selected.border-blue,.pointer.border-blue li,.nav.border-blue .active a,.nav.nav-tabs.border-blue,.nav-main.border-blue a, .nav-main.border-blue .nav-head,.pagination.border-blue li,.pager.border-blue a
+{border-color:#0ae;}
+.border-green,.border-green .button,.border-green .tab-nav li a,.border-green .tab-body,.button.bg-green,.selected.border-green,.pointer.border-green li,.check-success .input,.nav.border-green .active a,.nav.nav-tabs.border-green,.nav-main.border-green a, .nav-main.border-green .nav-head,.pagination.border-green li,.pager.border-green a
+{border-color:#2c7;}
+.border-red-light,.border-red-light .button,.border-red-light .tab-nav li a,.border-red-light .tab-body,.button.bg-red-light,.selected.border-red-light,.alert-red,.pointer.border-red-light li,.nav.border-red-light .active a,.nav.nav-tabs.border-red-light,.nav-main.border-red-light a, .nav-main.border-red-light .nav-head,.pagination.border-red-light li,.pager.border-red-light a
+{border-color:#fee;}
+.border-yellow-light,.border-yellow-light .button,.border-yellow-light .tab-nav li a,.border-yellow-light .tab-body,.button.bg-yellow-light,.selected.border-yellow-light,.alert-yellow,.pointer.border-yellow-light li,.nav.border-yellow-light .active a,.nav.nav-tabs.border-yellow-light,.nav-main.border-yellow-light a, .nav-main.border-yellow-light .nav-head,.pagination.border-yellow-light li,.pager.border-yellow-light a
+{border-color:#ffd;}
+.border-blue-light,.border-blue-light .button,.border-blue-light .tab-nav li a,.border-blue-light .tab-body,.button.bg-blue-light,.selected.border-blue-light,.alert-blue,.pointer.border-blue-light li,.nav.border-blue-light .active a,.nav.nav-tabs.border-blue-light,.nav-main.border-blue-light a, .nav-main.border-blue-light .nav-head,.pagination.border-blue-light li,.pager.border-blue-light a
+{border-color:#eff;}
+.border-green-light,.border-green-light .button,.border-green-light .tab-nav li a,.border-green-light .tab-body,.button.bg-green-light,.selected.border-green-light,.alert-green,.pointer.border-green-light li,.nav.border-green-light .active a,.nav.nav-tabs.border-green-light,.nav-main.border-green-light a, .nav-main.border-green-light .nav-head,.pagination.border-green-light li,.pager.border-green-light a
+{border-color:#efd;}
+.button:hover,.button:focus,.button.bg:hover,.button.bg:focus{background-color:#f5f5f5;}
+.button.border-black:hover,.button.border-black:focus,.button.bg-black:hover,.button.bg-black:focus{color:#fff;border-color:#666;background-color:#666;}
+.button.border-gray:hover,.button.border-gray:focus,.button.bg-gray:hover,.button.bg-gray:focus{color:#fff;border-color:#aaa;background-color:#aaa;}
+.button.border-white:hover,.button.border-white:focus,.button.bg-white:hover,.button.bg-white:focus{color:#333;border-color:#f5f5f5;background-color:#f5f5f5;}
+.button.border-red:hover,.button.border-red:focus,.button.bg-red:hover,.button.bg-red:focus{color:#fff;border-color:#f00;background-color:#f00;}
+.button.border-yellow:hover,.button.border-yellow:focus,.button.bg-yellow:hover,.button.bg-yellow:focus{color:#fff;border-color:#f90;background-color:#f90;}
+.button.border-blue:hover,.button.border-blue:focus,.button.bg-blue:hover,.button.bg-blue:focus{color:#fff;border-color:#3bd;background-color:#3bd;}
+.button.border-green:hover,.button.border-green:focus,.button.bg-green:hover,.button.bg-green:focus{color:#fff;border-color:#5d8;background-color:#5d8;}
+.button.border-red-light:hover,.button.border-red-light:focus,.button.bg-red-light:hover,.button.bg-red-light:focus,.alert-red:hover{color:#e33;border-color:#fdc;background-color:#fdc;}
+.button.border-yellow-light:hover,.button.border-yellow-light:focus,.button.bg-yellow-light:hover,.button.bg-yellow-light:focus,.alert-yellow:hover{color:#f60;border-color:#fec;background-color:#fec;}
+.button.border-blue-light:hover,.button.border-blue-light:focus,.button.bg-blue-light:hover,.button.bg-blue-light:focus,.alert-blue:hover{color:#0ae;border-color:#def;background-color:#def;}
+.button.border-green-light:hover,.button.border-green-light:focus,.button.bg-green-light:hover,.button.bg-green-light:focus,.alert-green:hover{color:#2c7;border-color:#cfa;background-color:#cfa;}
+
+.FileUpload{position:relative;padding:0px;margin:0px;display:inline-block;width:4rem;height:4rem;text-align:center;overflow:hidden;}
+.FileUpload img{display:block;width:3rem;height:3rem;margin:0.5rem;}
+.FileUpload .removeimg{position:absolute;top:0px;right:0px;width:1rem;height:1rem;font-size:1rem;line-height:1rem;background-color:#FF860A;border-radius:30px;color:#ffffff;}
+.FileUpload a{border:0.3rem dashed #CACACA;color:#CACACA;padding:0px;margin:0px;display:inline-block;width:3.2rem;height:3.2rem;text-align:center;line-height:3rem;font-family:Verdana;font-size:3rem;content:'+';}
+

@@ -1,0 +1,70 @@
+﻿<style type="text/css">
+	.tab-nav{display:table;width:100%;background:#fafafa;}
+	.nav-item{display:table-cell;width:33.3%;font-size:1.4rem;line-height:5rem;text-align:center;border-bottom:0.2rem solid #999999;color:#333333;text-align:center;}
+	.nav-item.active{border-bottom-color:#DC341D;}
+</style>
+<div class="wln">
+    <div class="tab-nav">
+        <div class="nav-item" rightfor="back" style="width:60px;"><< 权限设置</div>
+        <div class="nav-item active" rightfor="system" style="width:60px;">系统权限</div>
+        <div class="nav-item" rightfor="column" style="width:60px;">栏目权限</div>
+    </div>
+    <table id="dataTable" class="datagrid">
+        <tr>
+            <td style="width:38px; text-align:center;" field="RowIndex">序号</td>
+            <td style="width:99px; text-align:center;" field="Name">名称</td>
+            <td style="width:auto; text-align:left;" field="Code">权限点</td>
+            <td style="width:58px; text-align:center;" field="State">状态</td>
+            <td style="width:128px;" function="onAction">操作</td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    sessionStorage.setItem('inline', '<li>系统</li><li>权限设置</li>');
+    var table = control.datagrid('dataTable', location.pathname + '?do=pager&userid=@ViewBag.UserId', {}, 100);
+    table.State = function (e) {
+        if (e.State) {
+            return '<font style="color:#7DB72F">已授权</font>';
+        } else {
+            return '<font style="color:#999999">未授权</font>';
+        }
+    }
+    table.onAction = function (e) {
+        var str = '<a onclick="Set(\'' + e.Code + '\',\'' + e.RightFor + '\')">授予</a>';
+        str += '　<a onclick="Del(\'' + e.Code + '\',\'' + e.RightFor + '\')">取消</a>';
+        return str;
+    }
+    $(function () {
+        $('.nav-item').click(function () {
+            $('.nav-item').removeClass('active');
+            var rightfor = $(this).attr('rightfor');
+            $(this).addClass('active');
+            if (rightfor == "back") {
+                self.history.back();
+            } else {
+                table.clear();
+                table.load({ 'rightfor': rightfor });
+            }
+        })
+    })
+
+    function Set(Code, For) {
+        $.getJSON(location.pathname + '?do=set', { UserId: '@ViewBag.UserId', 'code': Code, 'rightfor': For }, function (json) {
+            if (json.success) {
+                table.reload();
+            } else {
+                control.error('授权操作失败');
+            }
+        });
+    }
+    function Del(Code, For) {
+        $.getJSON(location.pathname + '?do=del', { UserId: '@ViewBag.UserId', 'code': Code, 'rightfor': For }, function (json) {
+            if (json.success) {
+                table.reload();
+            } else {
+                control.error('授权信息取消失败');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,37 @@
+﻿<div class="wln">
+    <div class="wln-title">
+        <strong>基础设置</strong>
+    </div>
+    <div class="line"></div>
+    <table class="control-window-table">
+        <tr>
+            <td>系统名称：</td>
+            <td>
+                <input id="SystemName" onfocus="ClearTips()" onchange="ChangeSave(this)" type="text" value="@ViewBag.SystemName" required="required" /><span class="tips"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+    function ClearTips() {
+        $(this).next().html('');
+    }
+    function ChangeSave(e) {
+        var obj = $(e);
+        if (obj.val() || !obj.attr('required')) {
+            obj.next().html('<font style="color:#2196F3">保存中...</font>');
+            $.getJSON(location.pathname + '?do=set', { key: obj.attr('id'), value: obj.val() }, function (json) {
+                if (json.success) {
+                    obj.next().html('<font style="color:#4CAF50">已保存</font>');
+                    setTimeout(function () {
+                        obj.next().html('');
+                    }, 2000);
+                } else {
+                    obj.next().html('<font style="color:#F44336">' + json.message + '</font>');
+                }
+            });
+        } else {
+            obj.next().html('<font style="color:#F44336">必填项</font>');
+        }
+    }
+</script>

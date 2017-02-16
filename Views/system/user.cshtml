@@ -1,0 +1,146 @@
+﻿<div class="wln">
+    <div class="wln-title">
+        <span>
+            <input type="text" id="searchkey" onkeydown="ToSearch(event)" placeholder="按回车键进行查找" />
+        </span>
+        <strong>用户列表</strong><a onclick="Form('')"><i class="iconfont icon-plug"></i>新增帐号</a>
+    </div>
+    <div class="line"></div>
+    <table id="dataTable" class="datagrid">
+        <tr>
+            <td style="width:38px; text-align:center;" field="RowIndex">序号</td>
+            <td style="width:68px; text-align:center;" field="Username" class="datagrid-orderby">用户名</td>
+            <td style="width:58px; text-align:center;" field="State" class="datagrid-orderby">状态</td>
+            <td style="width:88px; text-align:center;" field="TrueName" class="datagrid-orderby">姓名</td>
+            <td style="width:128px; text-align:center;" field="Position" class="datagrid-orderby">单位/岗位</td>
+            <td style="width:108px; text-align:center;" field="CreateTime" class="datagrid-orderby">添加时间</td>
+            <td style="width:108px; text-align:center;" field="LastLogin" class="datagrid-orderby">最近登录</td>          
+            <td style="width:128px;" function="onAction">操作</td>
+        </tr>
+    </table>
+
+    <div class="wln-window" id="userinfo">
+        <table class="wln-window-table">
+            <tr>
+                <td>用户名：</td>
+                <td>
+                    <input type="text" id="Username" /><span class="tips notnull">登录帐号，尽量不要使用中文</span>
+                </td>
+            </tr>
+            <tr>
+                <td>姓名：</td>
+                <td>
+                    <input type="text" id="TrueName" /><span class="tips notnull">人员姓名，用于识别及操作记录</span>
+                </td>
+            </tr>
+            <tr>
+                <td>单位/职位：</td>
+                <td>
+                    <input type="text" id="Position" /><span class="tips"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>状态：</td>
+                <td>
+                    <select id="State">
+                        <option value="1">正常</option>
+                        <option value="0" class="gray">停用</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div class="wln-window-btns">
+            <a class="button green" onclick="Save();">确定</a>
+            <a class="button white" onclick="control.close()">关闭</a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    sessionStorage.setItem('inline', '<li>系统</li><li>用户管理</li>');
+    var table = control.datagrid('dataTable', location.pathname + '?do=list', 10);
+    function ToSearch(e) {
+        if (e.keyCode == 13) {
+            table.pageIndex = 1;
+            table.load({ key: $('#searchkey').val() })
+        }
+    }
+    table.State = function (e) {
+        if (e.State == '正常') {
+            return '<font style="color:#7DB72F">' + e.State + '</font>';
+        } else {
+            return '<font style="color:#999999">' + e.State + '</font>';
+        }
+    }
+    table.onAction = function (e) {
+        var str = '<a onclick="Form(\'' + e.Id + '\')">编辑</a>';
+        str += '　<a href="rights?userid=' + e.Id + '">权限设置</a>';
+        str += '　<a onclick="RePwd(\'' + e.Id + '\')">重置密码</a>';
+        str += '　<a onclick="Del(\'' + e.Id + '\')">删除</a>';
+        return str;
+    }
+    var thisId = '';
+    function Form(Id) {
+        thisId = '';
+        control.window('userinfo', Id ? '编辑' : '新增', 520, 380,
+            function () {
+                if (Id) {
+                    $.getJSON(location.pathname + '?do=get', { Id: Id }, function (json) {
+                        if (json && json.Id) {
+                            thisId = json.Id;
+                            $('#Username').val(json.Username);
+                            $('#TrueName').val(json.TrueName);
+                            $('#Position').val(json.Position);
+                            $('#State').val(json.State);
+                        }
+                    });
+                } else {
+                    $('#trArea').show();
+                }
+            },
+            function () {
+                //关闭时回调
+            });
+    }
+    function Save() {
+        $.getJSON(location.pathname + '?do=set', {
+            Id: thisId
+            , Username: encodeURIComponent($('#Username').val())
+            , TrueName: encodeURIComponent($('#TrueName').val())
+            , Position: encodeURIComponent($('#Position').val())
+            , State: $('#State').val()
+        }, function (json) {
+            if (json.success) {
+                table.reload();
+                control.close();
+            } else {
+                control.error(json.message);
+            }
+        });
+    }
+    function Del(Id) {
+        control.confirm('用户一旦删除将不可恢复，确定要删除吗?', '操作确认', function () {
+            $.getJSON(location.pathname + '?do=del', { Id: Id }, function (json) {
+                if (json.success) {
+                    table.reload();
+                    control.success(json.message);
+                } else {
+                    control.error(json.message);
+                }
+            });
+        });
+    }
+    function RePwd(Id) {
+        control.confirm('确定要将用户密码重置为默认密码（@ViewBag.DefaultPwd）吗?', '操作确认', function () {
+            $.getJSON(location.pathname + '?do=del', { Id: Id }, function (json) {
+                $.getJSON(location.pathname + '?do=repwd', { Id: Id }, function (json) {
+                    if (json.success) {
+                        control.success(json.message);
+                    } else {
+                        control.error(json.message);
+                    }
+                });
+            });
+        });
+    }
+</script>

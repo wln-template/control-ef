@@ -1,0 +1,125 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Pragma" contect="no-cache" />
+    <title>@Html.Raw(ViewBag.SystemName) - 管理后台</title>
+    <link rel="stylesheet" type="text/css" href="/control/style.css">
+    <script type="text/javascript" src="@ViewBag.Assets/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body style="background:#f2f9fd;">
+    <div class="lefter">
+        <div class="logo"><a><img src="@ViewBag.ResPath/img/logo.png" alt="@ViewBag.SystemName" /></a></div>
+    </div>
+    <div class="righter nav-navicon" id="admin-nav">
+        <div class="mainer">
+            <div class="admin-navbar">
+                <span class="float-right">
+                    <a class="button button-little bg-blue" link="/system/pwd">@Html.Raw(ViewBag.TrueName)</a>
+                    <a class="button button-little bg-yellow" href="?do=logout">注销登录</a>
+                </span>
+                <ul class="nav nav-inline admin-nav">
+                    <li>
+                        <a link="/system/main" class="icon-home"> 开始</a>
+                        <ul>
+                            <li><a link="/system/pwd">修改密码</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:MenuInit()" class="icon-cog">内容管理</a>
+                        <ul id="menuContent" style="overflow-y:auto;height:540px;"></ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" class="icon-cog"> 系统</a>
+                        <ul>
+                            <li><a link="/system/setting">基础设置</a></li>
+                            <li><a link="/system/user">用户管理</a></li>
+                            @if (ViewBag.SubSystem){
+                            <li><a link="/system/organ">下级部门</a></li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="admin-bread">
+                <ul class="bread" id="inline"><li>开始</li></ul>
+            </div>
+        </div>
+    </div>
+    <div class="admin" id="panel"></div>
+    <script type="text/javascript">
+        $(function () {
+            $('.nav-inline li:first-child').addClass('active');
+            $('.nav-inline li').click(function () {
+                $('.nav-inline li').removeClass('active');
+                $(this).addClass('active');
+            });
+            $('a').click(function () {
+                if ($(this).attr('link')) {
+                    GotoPage($(this).attr('link'));
+                }
+            })
+        });
+        function GotoPage(url) {
+            var html = '<iframe id="ifrpanel" src="' + url + '" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" width="100%" height="' + ($('#panel').height() - 5) + '"></iframe>';
+            document.getElementById('panel').innerHTML = html;
+        }
+        function MenuInit() {
+            $.getJSON('/rest/column', {}, function (data) {
+                if (data && data.length > 0) {
+                    var _str = '';
+                    $(data).each(function () {
+                        _str += '<li id="node-' + this.id + '"><a href="javascript:NodeClick(\'' + this.id + '\',\'' + this.type + '\',\'' + this.code + '\',\'' + this.og + '\',\'\')">' + this.name + '</a><div class="child" id="child-' + this.id + '"></div></li>';
+                    });
+                    $('#menuContent').html(_str).height($(window).height() - $('#menuContent').offset().top);
+                } else {
+                    $('#menuContent').html('<div style="text-align:center;padding:60px 30px;">暂无可操作栏目</div>');
+                }
+            });
+        }
+        function NodePage(_id, _type, _code, _og) {
+            $('#node-' + _id).find('span').remove();
+            if ($('#child-' + _id).text().length > 0) {
+                if ($('#child-' + _id).is(':hidden')) {
+                    $('#child-' + _id).show();
+                    $('#node-' + _id).append('<span onclick="GotoPage(\'/manage/' + _type + '?og=' + _og + '&code=' + _code + '\')">选择</span>');
+                } else {
+                    $('#child-' + _id).hide();
+                }
+            } else {
+                GotoPage('/manage/' + _type + '?og=' + _og + '&code=' + _code);
+            }
+        }
+        function NodeClick(_id, _type, _code, _og, before) {
+            $.getJSON('/rest/column', { code: _code }, function (data) {
+                if (data && data.length > 0) {
+                    var _str = '';
+                    $(data).each(function () {
+                        _str += '<a id="node-' + this.id + '" href="javascript:NodeClick(\'' + this.id + '\',\'' + this.type + '\',\'' + this.code + '\',\'' + this.og + '\',\'' + before + '&nbsp;\')">' + before + '└ ' + this.name + '</a><div class="child" id="child-' + this.id + '"></div>';
+                    });
+                    $('#child-' + _id).append(_str).show();
+                    $('#node-' + _id).append('<span onclick="GotoPage(\'/manage/' + _type + '?og=' + _og + '&code=' + _code + '\')">选择</span>');
+                } else {
+                    GotoPage('/manage/' + _type + '?og=' + _og + '&code=' + _code);
+                }
+            });
+            var _a = $('#node-' + _id);
+            if (_a.parent().is('ul')) {
+                _a = _a.find('a');
+            }
+            _a.attr('href', 'javascript:NodePage(\'' + _id + '\',\'' + _type + '\',\'' + _code + '\',\'' + _og + '\')');
+        }
+        setInterval(function () {
+            var inline = sessionStorage.getItem('inline');
+            if (inline) {
+                $('#inline').html(inline);
+                sessionStorage.removeItem('inline');
+            }
+        }, 100);
+        GotoPage('/w/main');
+    </script>
+</body>
+</html>
